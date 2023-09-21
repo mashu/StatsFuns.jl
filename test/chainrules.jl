@@ -50,4 +50,21 @@ using Random
     _, pb = rrule(poislogpdf, 0.0, 1)
     _, x̄1, _ = pb(1)
     @test x̄1 == Inf
+
+    #k = exp(randn())
+    #θ = exp(randn())
+    #x = exp(randn())
+    #test_frule(gammalogccdf, k, θ, x)
+    #test_rrule(gammalogccdf, k, θ, x)
+
+    #λ = exp(randn())
+    #x = rand(1:100)
+    #test_frule(poislogcdf, λ, x)
+    #test_rrule(poislogcdf, λ, x)
+
+    #_, pb = rrule(poislogcdf, 0.0, 0)
+    #_, λ̄1, _ = pb(1)
+    #@test λ̄1 == -1
+end
+
 end

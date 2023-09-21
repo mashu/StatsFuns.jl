@@ -64,6 +64,31 @@ ChainRulesCore.@scalar_rule(
 )
 
 ChainRulesCore.@scalar_rule(
+    gammalogccdf(k::Number, θ::Number, x::Number),
+    @setup(
+        pdfval = gammapdf(k, θ, x),
+        ccdfval = gammaccdf(k, θ, x)
+    ),
+    (
+        ChainRulesCore.NoTangent(),
+        ChainRulesCore.NoTangent(),
+        -pdfval / ccdfval
+    ),
+)
+
+ChainRulesCore.@scalar_rule(
+    poislogcdf(λ::Real, x::Int),
+    @setup(
+        pmfval = poispdf(λ, x),
+        ccdfval = poisccdf(λ, x)
+    ),
+    (
+        ChainRulesCore.NoTangent(),
+        -pmfval / ccdfval
+    )
+)
+
+ChainRulesCore.@scalar_rule(
     poislogpdf(λ::Number, x::Number),
     ((iszero(x) && iszero(λ) ? zero(x / λ) : x / λ) - 1, ChainRulesCore.NoTangent()),
 )
